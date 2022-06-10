@@ -11,18 +11,14 @@ namespace DecisionMaking.StateMachine
 {
     public class RootFSM : FSM
     {
-        //public UpdateMode mode = UpdateMode.Update;
-
-        //[Tooltip("how often the state machine executes in seconds")]
-        //[SerializeField] protected float m_executionTimeStep = .02f;
-
-        //protected bool m_isRunning;
-
         [Tooltip("Is the Root FSM turned on")]
         public bool isTurnedOn = false;
 
         [Header("Gizmos")]
         public bool showState;
+
+        //A flag to indicate that RootFSM has been manually added to RootFSMManager
+        [HideInInspector] public bool isAdded;
 
         protected override void Awake()
         {
@@ -40,19 +36,6 @@ namespace DecisionMaking.StateMachine
                 isTurnedOn = true;
                 OnEnter();
             }
-
-            //if (!m_isRunning)
-            //{
-            //    //Reset Current State to the initial one if configured
-            //    if (m_resetCurrentState)
-            //        m_curState = m_initialState;
-
-            //    //Entering the Root FSM
-            //    OnEnter();
-
-            //    StartCoroutine(nameof(StateMachineRoutine));
-            //    m_isRunning = true;
-            //}
         }
 
         /// <summary>
@@ -66,43 +49,7 @@ namespace DecisionMaking.StateMachine
                 isTurnedOn = false;
                 OnExit();
             }
-
-            //if (m_isRunning)
-            //{
-            //    StopCoroutine(nameof(StateMachineRoutine));
-            //    m_isRunning = false;
-
-            //    //Exiting the Root FSM
-            //    OnExit();
-            //}
         }
-
-        /// <summary>
-        /// Main Executing Loop of the Finite State Machine
-        /// </summary>
-        /// <returns></returns>
-        //private IEnumerator StateMachineRoutine()
-        //{
-        //    while (true)
-        //    {
-        //        OnUpdate();
-
-        //        switch (mode)
-        //        {
-        //            case UpdateMode.Update:
-        //                yield return null;
-        //                break;
-
-        //            case UpdateMode.FixedUpdate:
-        //                yield return new WaitForFixedUpdate();
-        //                break;
-
-        //            case UpdateMode.TimeStep:
-        //                yield return new WaitForSeconds(m_executionTimeStep);
-        //                break;
-        //        }
-        //    }
-        //}
 
         private void OnDrawGizmos()
         {

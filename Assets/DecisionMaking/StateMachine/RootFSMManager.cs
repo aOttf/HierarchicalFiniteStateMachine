@@ -29,7 +29,12 @@ namespace DecisionMaking.StateMachine
         {
             base.Init();
 
-            //TODO: Find all unadded Root FSMs into default
+            m_beforeDefaultTimeExecution.ForEach(rootFSM => rootFSM.isAdded = true);
+            m_afterDefaultTimeExecution.ForEach(rootFSM => rootFSM.isAdded = true);
+
+            //Find all unadded Root FSMs into default
+            m_inDefaultTimeExecution.AddRange(FindObjectsOfType<RootFSM>().ToList().FindAll(rootFSM => !rootFSM.isAdded));
+            m_inDefaultTimeExecution.ForEach(rootFSM => rootFSM.isAdded = true);
         }
 
         protected virtual void Start()
