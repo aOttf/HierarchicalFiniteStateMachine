@@ -71,6 +71,7 @@ namespace DecisionMaking.StateMachine
     /// <summary>
     /// FSMBase can be attached to a Finite State Machine. It's the base class every StateMachineBehaviour attached to a State Machine derived from.
     /// </summary>
+    [RequireComponent(typeof(RootFSM))]
     public abstract class FSMBase : StateBehaviour
     {
         [SerializeField] protected List<Transition> m_transitions;
@@ -90,6 +91,7 @@ namespace DecisionMaking.StateMachine
         }
     }
 
+    [RequireComponent(typeof(RootFSM))]
     public abstract class FSM : FSMBase
     {
         #region Inspector GUI

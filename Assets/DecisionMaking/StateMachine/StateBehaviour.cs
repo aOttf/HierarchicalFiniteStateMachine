@@ -12,6 +12,7 @@ namespace DecisionMaking
     public abstract class StateBehaviour : MonoBehaviour
     {
         protected BlackboardManager m_blackboardManager;
+        protected bool m_isActive;
 
         protected virtual void Awake()
         {
@@ -28,7 +29,9 @@ namespace DecisionMaking
         /// On Enter the Sa
         /// </summary>
         public virtual void OnEnter()
-        { }
+        {
+            m_isActive = true;
+        }
 
         /// <summary>
         /// On Update the State
@@ -40,7 +43,7 @@ namespace DecisionMaking
         /// On Exit the State
         /// </summary>
         public virtual void OnExit()
-        { }
+        { m_isActive = false; }
 
         public T GetStateBehaviour<T>() where T : StateBehaviour => GetComponent<T>();
 
